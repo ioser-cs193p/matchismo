@@ -1,4 +1,4 @@
-Richard Millet
+Richard E. Millet
 matchismo
 =========
 
