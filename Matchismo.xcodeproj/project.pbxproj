@@ -112,8 +112,6 @@
 		9ACEE774182AE55000991872 /* Matchismo */ = {
 			isa = PBXGroup;
 			children = (
-				9ACEE77D182AE55000991872 /* CardGameAppDelegate.h */,
-				9ACEE77E182AE55000991872 /* CardGameAppDelegate.m */,
 				9ACEE780182AE55000991872 /* Main.storyboard */,
 				9ACEE783182AE55000991872 /* CardGameViewController.h */,
 				9ACEE784182AE55000991872 /* CardGameViewController.m */,
@@ -126,6 +124,8 @@
 		9ACEE775182AE55000991872 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9ACEE77D182AE55000991872 /* CardGameAppDelegate.h */,
+				9ACEE77E182AE55000991872 /* CardGameAppDelegate.m */,
 				9ACEE776182AE55000991872 /* Matchismo-Info.plist */,
 				9ACEE777182AE55000991872 /* InfoPlist.strings */,
 				9ACEE77A182AE55000991872 /* main.m */,
@@ -461,6 +461,7 @@
 				9ACEE79F182AE55000991872 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9ACEE7A0182AE55000991872 /* Build configuration list for PBXNativeTarget "MatchismoTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +470,7 @@
 				9ACEE7A2182AE55000991872 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
