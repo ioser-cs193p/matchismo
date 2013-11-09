@@ -11,10 +11,10 @@
 
 @interface Deck : NSObject
 
+@property (nonatomic, readonly)NSUInteger count;
+
 - (void)addCard:(Card *)card atTop:(BOOL)atTop;
 - (void)addCard:(Card *)card;
-- (NSUInteger)count;
-
 - (Card *)drawRandomCard;
 
 @end
