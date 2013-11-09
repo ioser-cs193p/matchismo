@@ -40,10 +40,16 @@
 - (Deck *)deck
 {
 	if (_deck == nil) {
-		_deck = [[PlayingCardDeck alloc] init];
+		_deck = [self createDeck];
 	}
 	
 	return _deck;
+}
+
+// Should move this method to an override method in PlayingCardDeck class
+- (Deck *)createDeck
+{
+	return [[PlayingCardDeck alloc] init];
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
