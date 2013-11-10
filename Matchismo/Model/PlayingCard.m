@@ -36,6 +36,25 @@
 }
 
 //
+// Override the match method.  Making it specific to the PlayingCard class
+//
+- (int)match:(NSArray *)otherCards
+{
+	int result = 0;
+
+	if ([otherCards count] == 1) {
+		PlayingCard *otherCard = [otherCards firstObject]; // aka, otherCards[1]
+		if (otherCard.rank == self.rank) {
+			result = 4;
+		} else if ([otherCard.suit isEqualToString:self.suit]) {
+			result = 1;
+		}
+	}
+	
+	return result;
+}
+
+//
 // Private Methods
 //
 + (NSArray *)rankStrings
