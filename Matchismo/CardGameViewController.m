@@ -39,6 +39,14 @@
 // Custom code
 //
 
+//
+// Start with a new Deck
+//
+- (IBAction)redeal:(UIButton *)sender {
+	_gameModel = nil;
+	[self updateUI];
+}
+
 - (CardMatchingGame *)gameModel
 {
 	if (_gameModel == nil) {
