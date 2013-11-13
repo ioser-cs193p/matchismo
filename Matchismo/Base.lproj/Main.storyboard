@@ -178,10 +178,23 @@
                                     <action selector="redeal:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fix-rr-Hun"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0VN-qH-jTs">
+                                <rect key="frame" x="105" y="393" width="123" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="2 Card"/>
+                                    <segment title="3 Card"/>
+                                </segments>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="segmentedControlTouched:" destination="vXZ-lx-hvc" eventType="valueChanged" id="KV4-o9-j6y"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="cardsToMatchControl" destination="0VN-qH-jTs" id="4W1-6b-yDO"/>
                         <outlet property="scoreLabel" destination="LBZ-sH-Nc3" id="CLw-7n-AJs"/>
                         <outletCollection property="cardButtonList" destination="zue-uX-3dB" id="IlL-gm-yJ2"/>
                         <outletCollection property="cardButtonList" destination="ECL-9E-tuh" id="z3t-S5-tzg"/>

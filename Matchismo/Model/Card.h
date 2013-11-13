@@ -14,6 +14,9 @@
 @property (nonatomic, getter = isChosen) BOOL chosen;
 @property (nonatomic, getter = isMatched) BOOL matched;
 
++ (int)match:(NSArray *)cardList numberOfRequiredMatches:(NSUInteger)numberOfRequiredMatches;
 - (int) match:(NSArray *)otherCards;
+- (int)getNumberOfMatches:(NSArray *)otherCardList;
+- (BOOL)doCardsMatch:(Card *)otherCard;
 
 @end

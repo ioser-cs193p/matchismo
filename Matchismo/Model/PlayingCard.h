@@ -15,5 +15,6 @@
 
 + (NSArray *) validSuits;
 + (NSUInteger) maxRank;
++ (PlayingCard *) newWithSuit:(NSString *)suit andRank:(NSUInteger)rank;
 
 @end

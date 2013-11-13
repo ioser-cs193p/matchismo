@@ -16,6 +16,23 @@
 //
 @synthesize suit = _suit;
 
++ (PlayingCard *) newWithSuit:(NSString *)suit andRank:(NSUInteger)rank
+{
+	return [[PlayingCard alloc] initWithSuit:suit andRank: rank];
+}
+
+- (instancetype)initWithSuit:(NSString *)suit andRank:(NSUInteger)rank
+{
+	self = [super init];
+	
+	if (self != nil) {
+		self.suit = suit;
+		self.rank = rank;
+	}
+	
+	return self;
+}
+
 - (NSString *)suit
 {
 	return _suit != nil ? _suit : @"?";
@@ -38,19 +55,18 @@
 //
 // Override the match method.  Making it specific to the PlayingCard class
 //
-- (int)match:(NSArray *)otherCards
+- (int)match:(NSArray *)otherCardList
 {
 	int result = 0;
-
-	if ([otherCards count] == 1) {
-		PlayingCard *otherCard = [otherCards firstObject]; // aka, otherCards[1]
+	
+	for (PlayingCard *otherCard in otherCardList) {
 		if (otherCard.rank == self.rank) {
-			result = 4;
+			result += 4;
 		} else if ([otherCard.suit isEqualToString:self.suit]) {
-			result = 1;
+			result += 1;
 		}
 	}
-	
+
 	return result;
 }
 

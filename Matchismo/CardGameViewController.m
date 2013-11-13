@@ -14,10 +14,10 @@
 
 @interface CardGameViewController ()
 
-
 @property (strong, nonatomic) CardMatchingGame *gameModel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtonList;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *cardsToMatchControl;
 
 @end
 
@@ -38,6 +38,10 @@
 //
 // Custom code
 //
+- (IBAction)segmentedControlTouched:(UISegmentedControl *)sender {
+	NSInteger segmentSelected = [sender selectedSegmentIndex];
+	NSLog(@"Segment %d selected.", segmentSelected);
+}
 
 //
 // Start with a new Deck
@@ -47,13 +51,31 @@
 	[self updateUI];
 }
 
+- (NSUInteger)numberOfRequiredMatches
+{
+	NSUInteger result = 1;
+	
+	// Get the selected selegment control value.  If it is greater than 0, use that value.
+	// Otherwise, use 0.
+	// 1 means match 2 cards
+	// 2 means match 3 cards
+	// n means match n + 1 cards
+	NSInteger selectedSegmentIndex = [self.cardsToMatchControl selectedSegmentIndex];
+	if (selectedSegmentIndex > 0) {
+		result = selectedSegmentIndex + 1;
+	}
+	
+	return result;
+}
+
 - (CardMatchingGame *)gameModel
 {
 	if (_gameModel == nil) {
-		_gameModel = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtonList count]
-													   usingDeck:[self createDeck]];
+		_gameModel = [[CardMatchingGame alloc] initWithCardCount: [self.cardButtonList count]
+													   usingDeck: [self createDeck]
+													   inMatchMode: [self numberOfRequiredMatches]];
 	}
-	
+		
 	return _gameModel;
 }
 
@@ -65,6 +87,8 @@
 
 - (void)updateUI
 {
+	self.cardsToMatchControl.enabled = _gameModel == nil;
+	
 	for (int i = 0; i < [self.cardButtonList count]; i++) {
 		Card *card = [self.gameModel cardAtIndex:i];
 		UIButton *cardButton = self.cardButtonList[i];
