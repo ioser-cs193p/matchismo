@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtonList;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *cardsToMatchControl;
+@property (weak, nonatomic) IBOutlet UILabel *lastActionMessage;
 
 @end
 
@@ -51,7 +52,7 @@
 	[self updateUI];
 }
 
-- (NSUInteger)numberOfRequiredMatches
+- (NSUInteger)numberOfCardsToCompare
 {
 	NSUInteger result = 1;
 	
@@ -73,7 +74,7 @@
 	if (_gameModel == nil) {
 		_gameModel = [[CardMatchingGame alloc] initWithCardCount: [self.cardButtonList count]
 													   usingDeck: [self createDeck]
-													   inMatchMode: [self numberOfRequiredMatches]];
+													 numberOfCardsToCompare: [self numberOfCardsToCompare]];
 	}
 		
 	return _gameModel;
@@ -96,6 +97,9 @@
 		[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
 		cardButton.enabled = !card.isMatched;
 	}
+	NSString *lastActionMessage = [[self.gameModel actionMessageList] lastObject];
+	NSLog(@"Last message %@", lastActionMessage);
+	[self.lastActionMessage setText: lastActionMessage];
 	[self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", [self.gameModel score]]];
 }
 
