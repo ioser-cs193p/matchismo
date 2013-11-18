@@ -9,7 +9,6 @@
 #import "CardMatchingGame.h"
 #import "CardGameViewController.h"
 #import "Deck.h"
-#import "PlayingCardDeck.h"
 #import "Card.h"
 
 @interface CardGameViewController ()
@@ -83,7 +82,8 @@
 // Should move this method to an override method in PlayingCardDeck class
 - (Deck *)createDeck
 {
-	return [[PlayingCardDeck alloc] init];
+	NSLog(@"ERROR: Should never call this method.  Subclasses need to override.");
+	return nil;
 }
 
 - (void)updateUI
