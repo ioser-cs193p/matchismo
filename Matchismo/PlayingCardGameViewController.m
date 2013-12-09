@@ -10,6 +10,7 @@
 #import "Deck.h"
 #import "PlayingCardDeck.h"
 
+
 @interface PlayingCardGameViewController ()
 
 @end
@@ -43,6 +44,15 @@
 - (Deck *)createDeck
 {
 	return [[PlayingCardDeck alloc] init];
+}
+
+//
+// Override
+//
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+	NSLog(@"The name of the segue is %@", identifier);
+	return YES;
 }
 
 @end

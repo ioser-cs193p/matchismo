@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "CardGameViewController.h"
 
+//
+// Use these characters: ▲ ● ■ for drawing the Set cards
+//
+
 @interface SetGameViewController : CardGameViewController
 
 @end

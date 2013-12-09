@@ -9,6 +9,11 @@
 #import "SetGameViewController.h"
 #import "Deck.h"
 #import "SetDeck.h"
+#import "SetCard.h"
+
+//
+// Use these characters: ▲ ● ■ for drawing the Set cards
+//
 
 @interface SetGameViewController ()
 
@@ -42,7 +47,9 @@
 //
 - (Deck *)createDeck
 {
+	
 	NSLog(@"Created a new set deck.");
+	
 	return [[SetDeck alloc] init];
 }
 
