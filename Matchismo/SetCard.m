@@ -99,6 +99,14 @@
 	return self;
 }
 
+//
+// Inherited Public Methods
+//
+- (NSString *)contents
+{
+	return [self description];
+}
+
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"Rank:%d Suit:%@ Shading:%@ Color:%@",
