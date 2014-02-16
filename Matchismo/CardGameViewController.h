@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Card.h"
 
 @interface CardGameViewController : UIViewController
+
+- (NSAttributedString *) getAttributedContentsForCard:(Card *)card;
 
 @end

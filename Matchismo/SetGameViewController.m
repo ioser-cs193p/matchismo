@@ -53,4 +53,27 @@
 	return [[SetDeck alloc] init];
 }
 
+- (NSString *) getSymbolAndRankStringForCard:(SetCard *)setCard
+{
+	NSMutableString *result = [[NSMutableString alloc] init];
+	for (int i = 0; i < setCard.rank; i++) {
+		[result appendString:setCard.symbol];
+	}
+	
+	return result;
+}
+
+//
+// Returns an attributed string representation of a card
+//
+- (NSAttributedString *) getAttributedContentsForCard:(Card *)card
+{
+	SetCard *setCard = (SetCard *)card;
+	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:[self getSymbolAndRankStringForCard:setCard]
+																			   attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:9.0],
+																							NSForegroundColorAttributeName : [setCard color]}];
+
+	return result;
+}
+
 @end

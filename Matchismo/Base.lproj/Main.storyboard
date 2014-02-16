@@ -345,13 +345,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t04-nY-Bca">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t04-nY-Bca">
                                 <rect key="frame" x="116" y="186" width="40" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" backgroundImage="cardback">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <action selector="touchCardButton:" destination="tGa-5b-JLp" eventType="touchUpInside" id="bjb-an-xFw"/>

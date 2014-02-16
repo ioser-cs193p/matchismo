@@ -9,6 +9,7 @@
 #import "PlayingCardGameViewController.h"
 #import "Deck.h"
 #import "PlayingCardDeck.h"
+#import "PlayingCard.h"
 
 
 @interface PlayingCardGameViewController ()
@@ -36,6 +37,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// Override
+- (NSAttributedString *) getAttributedContentsForCard:(Card *)card
+{
+	PlayingCard *playingCard = (PlayingCard *)card;
+	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:[playingCard contents]
+																			   attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:9.0]}];
+	
+	return result;
+
 }
 
 //

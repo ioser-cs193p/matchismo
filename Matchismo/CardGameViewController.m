@@ -93,7 +93,8 @@
 	for (int i = 0; i < [self.cardButtonList count]; i++) {
 		Card *card = [self.gameModel cardAtIndex:i];
 		UIButton *cardButton = self.cardButtonList[i];
-		[cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+//		[cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+		[cardButton setAttributedTitle:[self attributedTitleForCard:card] forState:UIControlStateNormal];
 		[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
 		cardButton.enabled = !card.isMatched;
 	}
@@ -103,12 +104,12 @@
 	[self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", [self.gameModel score]]];
 }
 
-- (NSString *)titleForCard:(Card *)card
+- (NSAttributedString *)attributedTitleForCard:(Card *)card
 {
-	NSString * result = @"";
+	NSAttributedString * result = [[NSAttributedString alloc] initWithString:@""];
 	
 	if (card.isChosen) {
-		result = card.contents;
+		result = [self getAttributedContentsForCard:card];
 	}
 	
 	return result;
