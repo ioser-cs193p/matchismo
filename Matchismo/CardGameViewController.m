@@ -158,8 +158,7 @@
 // Start with a new Deck
 //
 - (IBAction)redeal:(UIButton *)sender {
-	_gameModel = nil;
-	[self updateUI];
+	[self restartGame];
 }
 
 - (NSUInteger)numberOfCardsToCompare
@@ -173,6 +172,12 @@
 	// n means match n + 1 cards
 	
 	return result;
+}
+
+- (void) restartGame
+{
+	_gameModel = nil;
+	[self updateUI];
 }
 
 - (CardMatchingGame *)gameModel

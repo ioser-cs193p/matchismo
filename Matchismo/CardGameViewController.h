@@ -14,5 +14,6 @@
 - (NSAttributedString *) getAttributedContentsForCard:(Card *)card;
 - (NSAttributedString *) attributedTitleForCard:(Card *)card;
 - (UIImage *)imageForCard:(Card *)card;
+- (void) restartGame;
 
 @end
