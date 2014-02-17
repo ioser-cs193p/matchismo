@@ -43,6 +43,20 @@
 }
 
 //
+// Override
+//
+- (UIImage *)imageForCard:(Card *)card
+{
+	UIImage *result = [UIImage imageNamed:@"setcardback"];
+	
+	if (card.isChosen) {
+		result = [UIImage imageNamed:@"setcardfront"];
+	}
+	
+	return result;
+}
+
+//
 // Override - overrides to create a deck of PlayingCard's
 //
 - (Deck *)createDeck

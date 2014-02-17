@@ -38,6 +38,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+//
+// This is an abstract method.
+//
+- (UIImage *)imageForCard:(Card *)card
+{
+	[NSException raise:@"An overriding method needs to be implemented in a subclass." format:@"Method not implemented in subclass: of %@ is invalid", @"imageForCard"];
+	return nil;
+}
+
 - (NSString *) stringFromCardList:(NSArray *)cardList
 {
 	NSMutableString *result = [[NSMutableString alloc] init];
@@ -182,7 +191,7 @@
 	for (int i = 0; i < [self.cardButtonList count]; i++) {
 		Card *card = [self.gameModel cardAtIndex:i];
 		UIButton *cardButton = self.cardButtonList[i];
-		[cardButton setAttributedTitle:card.isChosen ? [self attributedTitleForCard:card] : nil forState:UIControlStateNormal];
+		[cardButton setAttributedTitle:[self attributedTitleForCard:card] forState:UIControlStateNormal];
 		[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
 		cardButton.enabled = !card.isMatched;
 	}
@@ -197,16 +206,7 @@
 	return [self getAttributedContentsForCard:card];
 }
 
-- (UIImage *)imageForCard:(Card *)card
-{
-	UIImage *result = [UIImage imageNamed:@"cardback"];
-	
-	if (card.isChosen) {
-		result = [UIImage imageNamed:@"cardfront"];
-	}
-	
-	return result;
-}
+
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
