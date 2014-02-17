@@ -63,6 +63,21 @@
 	return result;
 }
 
+- (UIColor *) getFillColorAndAlphaForCard:(SetCard *)setCard
+{
+	UIColor *result = nil;
+	
+	if (setCard.shading == ShadingTypeOpen) {
+		result = [setCard.color colorWithAlphaComponent:0.0];
+	} else if (setCard.shading == ShadingTypeStriped) {
+		result = [setCard.color colorWithAlphaComponent:0.2];
+	} else if (setCard.shading == ShadingTypeSolid) {
+		result = setCard.color;
+	}
+	
+	return result;
+}
+
 //
 // Returns an attributed string representation of a card
 //
@@ -70,8 +85,13 @@
 {
 	SetCard *setCard = (SetCard *)card;
 	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:[self getSymbolAndRankStringForCard:setCard]
-																			   attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:9.0],
-																							NSForegroundColorAttributeName : [setCard color]}];
+										   attributes:@{ NSStrokeWidthAttributeName : @-3,
+														 NSFontAttributeName : [UIFont systemFontOfSize:18.0],
+														 NSForegroundColorAttributeName : [self getFillColorAndAlphaForCard:setCard],
+														 NSStrokeColorAttributeName : setCard.color,
+														 }];
+	
+//	NSDictionary *attributes = @{
 
 	return result;
 }

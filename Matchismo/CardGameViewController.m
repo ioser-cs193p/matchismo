@@ -5,9 +5,11 @@
 //  Created by Richard E Millet on 11/6/13.
 //  Copyright (c) 2013 remillet. All rights reserved.
 //
+//	This is an abstract class meant for concrete card game controllers.
 
 #import "CardMatchingGame.h"
 #import "CardGameViewController.h"
+#import "CardGameHistoryViewController.h"
 #import "Deck.h"
 #import "Card.h"
 
@@ -33,6 +35,36 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSString *) getHistory
+{
+	NSMutableString *result = [[NSMutableString alloc] init];
+	
+	for (NSString *actionString in [self.gameModel actionMessageList]) {
+		[result appendString:actionString];
+		[result appendString:@"\n"];
+	}
+	
+	return result;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[CardGameHistoryViewController class]]) {
+            CardGameHistoryViewController *historyViewController = (CardGameHistoryViewController *)segue.destinationViewController;
+            [historyViewController setHistory:[self getHistory]];
+        }
+    }
+}
+
+//
+// Subclasses must override this method.  Need to return an attributed string
+// that describes a card.
+//
+- (NSAttributedString *) getAttributedContentsForCard:(Card *)card {
+	return nil;
 }
 
 //
@@ -93,7 +125,6 @@
 	for (int i = 0; i < [self.cardButtonList count]; i++) {
 		Card *card = [self.gameModel cardAtIndex:i];
 		UIButton *cardButton = self.cardButtonList[i];
-//		[cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
 		[cardButton setAttributedTitle:[self attributedTitleForCard:card] forState:UIControlStateNormal];
 		[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
 		cardButton.enabled = !card.isMatched;

@@ -30,6 +30,7 @@
 		9ACEE790182AE55000991872 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACEE772182AE55000991872 /* UIKit.framework */; };
 		9ACEE798182AE55000991872 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9ACEE796182AE55000991872 /* InfoPlist.strings */; };
 		9ACEE79A182AE55000991872 /* MatchismoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACEE799182AE55000991872 /* MatchismoTests.m */; };
+		9ADDC39218B1480500E6690E /* CardGameHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADDC39118B1480500E6690E /* CardGameHistoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		9ACEE795182AE55000991872 /* MatchismoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatchismoTests-Info.plist"; sourceTree = "<group>"; };
 		9ACEE797182AE55000991872 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9ACEE799182AE55000991872 /* MatchismoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchismoTests.m; sourceTree = "<group>"; };
+		9ADDC39018B1480500E6690E /* CardGameHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardGameHistoryViewController.h; sourceTree = "<group>"; };
+		9ADDC39118B1480500E6690E /* CardGameHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardGameHistoryViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				9ACEE780182AE55000991872 /* Main.storyboard */,
+				9ADDC39018B1480500E6690E /* CardGameHistoryViewController.h */,
+				9ADDC39118B1480500E6690E /* CardGameHistoryViewController.m */,
 				9ACEE783182AE55000991872 /* CardGameViewController.h */,
 				9ACEE784182AE55000991872 /* CardGameViewController.m */,
 				9A86EEBC1839F58300575ED9 /* PlayingCardGame */,
@@ -285,6 +290,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = remillet;
 				TargetAttributes = {
+					9ACEE76A182AE55000991872 = {
+						DevelopmentTeam = 73NAYLPH9Y;
+					};
 					9ACEE78B182AE55000991872 = {
 						TestTargetID = 9ACEE76A182AE55000991872;
 					};
@@ -340,6 +348,7 @@
 				9A400BC0183B4C7000808B87 /* SetCard.m in Sources */,
 				9ACEE77B182AE55000991872 /* main.m in Sources */,
 				9A86EEBF1839F61200575ED9 /* PlayingCardGameViewController.m in Sources */,
+				9ADDC39218B1480500E6690E /* CardGameHistoryViewController.m in Sources */,
 				9A96C625182B5AE00008D3B8 /* PlayingCard.m in Sources */,
 				9A2EFE68182E11C50074DF00 /* CardMatchingGame.m in Sources */,
 				9A86EEBA1839F45500575ED9 /* SetGameViewController.m in Sources */,
@@ -473,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Matchismo/Matchismo-Prefix.pch";
 				INFOPLIST_FILE = "Matchismo/Matchismo-Info.plist";
@@ -486,6 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Matchismo/Matchismo-Prefix.pch";
 				INFOPLIST_FILE = "Matchismo/Matchismo-Info.plist";
