@@ -86,6 +86,7 @@
 		9ADDC39118B1480500E6690E /* CardGameHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardGameHistoryViewController.m; sourceTree = "<group>"; };
 		9ADDC39318B1A45B00E6690E /* CardGameAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardGameAction.h; sourceTree = "<group>"; };
 		9ADDC39418B1A45B00E6690E /* CardGameAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardGameAction.m; sourceTree = "<group>"; };
+		9ADDC39618B2A39600E6690E /* REMLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMLogger.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +226,7 @@
 				9ACEE777182AE55000991872 /* InfoPlist.strings */,
 				9ACEE77A182AE55000991872 /* main.m */,
 				9ACEE77C182AE55000991872 /* Matchismo-Prefix.pch */,
+				9ADDC39618B2A39600E6690E /* REMLogger.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

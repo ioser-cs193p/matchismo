@@ -97,7 +97,7 @@
 
 + (NSUInteger) maxRank
 {
-	NSArray *rankStrings = [PlayingCard rankStrings];
+//	NSArray *rankStrings = [PlayingCard rankStrings];
 	NSUInteger result = [[self rankStrings] count] - 1;
 	return result;
 }

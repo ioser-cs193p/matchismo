@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "CardGameAppDelegate.h"
+#import "REMLogger.h"
+
+BOOL myDebugEnabled = TRUE;
 
 int main(int argc, char * argv[])
 {

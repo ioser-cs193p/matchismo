@@ -45,6 +45,20 @@
 //
 // Override
 //
+- (NSUInteger)numberOfCardsToCompare
+{
+	NSUInteger result = 2;
+	
+	// 1 means match 2 cards
+	// 2 means match 3 cards
+	// n means match n + 1 cards
+	
+	return result;
+}
+
+//
+// Override
+//
 - (UIImage *)imageForCard:(Card *)card
 {
 	UIImage *result = [UIImage imageNamed:@"setcardback"];
@@ -107,5 +121,6 @@
 																			   attributes:[self getAttributesForCard:setCard]];
 	return result;
 }
+
 
 @end

@@ -19,7 +19,6 @@
 @property (strong, nonatomic) CardMatchingGame *gameModel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtonList;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *cardsToMatchControl;
 @property (weak, nonatomic) IBOutlet UILabel *lastActionMessage;
 
 @end
@@ -53,7 +52,7 @@
 	
 	for (int i = 0; i < cardList.count; i++) {
 		Card *card = [cardList objectAtIndex:i];
-		[result appendString:card.contents];
+		[result appendString:card.description];
 		if (i < cardList.count - 1) {
 			[result appendString:@", "];
 		}
@@ -69,12 +68,46 @@
  */
 - (NSAttributedString *) attributedStringFromString:(NSString *)string andCardList:(NSArray *)cardList
 {
+	NSMutableString *tempStr = [NSMutableString stringWithString:string];
 	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:string];
 	
 	for (Card *card in cardList) {
-		NSString *title = card.contents;
-		NSRange range = [string rangeOfString:title];
-		[result replaceCharactersInRange:range withAttributedString:[self attributedTitleForCard:card]];
+		NSRange range = [tempStr rangeOfString:card.description];
+		[result replaceCharactersInRange:range withAttributedString:[self getAttributedContentsForCard:card]];
+		[tempStr replaceCharactersInRange:range withString:card.contents];
+	}
+	
+	return result;
+}
+
+- (NSAttributedString *)getAttributedStringFromAction: (CardGameAction *)action
+{
+	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+	
+	NSString *actionString = nil;
+	switch (action.predicate) {
+		case CARD_GAME_ACTION_UNCHOSE:
+			actionString = [[NSString alloc] initWithFormat: @"Unchose card %@.", [self stringFromCardList:action.cardList]];
+			[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+			break;
+			
+		case CARD_GAME_ACTION_MATCH:
+			actionString = [[NSString alloc] initWithFormat: @"Matched %@ for %d points.", [self stringFromCardList:action.cardList], action.points];
+			[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+			break;
+			
+		case CARD_GAME_ACTION_NOMATCH:
+			actionString = [[NSString alloc] initWithFormat: @"No matches for %@. %d points substracted.", [self stringFromCardList:action.cardList], action.points];
+			[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+			break;
+			
+		case CARD_GAME_ACTION_CHOSE:
+			actionString = [[NSString alloc] initWithFormat: @"Chose card %@.", [self stringFromCardList:action.cardList]];
+			[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+			break;
+			
+		default:
+			break;
 	}
 	
 	return result;
@@ -83,33 +116,12 @@
 - (NSAttributedString *) getHistory
 {
 	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+	NSAttributedString *returnLine = [[NSAttributedString alloc] initWithString:@"\n"];
 	
 	for (CardGameAction *action in [self.gameModel cardGameActionList]) {
-		NSString *actionString = nil;
-		switch (action.predicate) {
-			case CARD_GAME_ACTION_UNCHOSE:
-				actionString = [[NSString alloc] initWithFormat: @"Unchose card %@.\n", [self stringFromCardList:action.cardList]];
-				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
-				break;
-				
-			case CARD_GAME_ACTION_MATCH:
-				actionString = [[NSString alloc] initWithFormat: @"Matched %@ for %d points.\n", [self stringFromCardList:action.cardList], action.points];
-				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
-				break;
-				
-			case CARD_GAME_ACTION_NOMATCH:
-				actionString = [[NSString alloc] initWithFormat: @"No matches for %@. %d points substracted.\n", [self stringFromCardList:action.cardList], action.points];
-				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
-				break;
-				
-			case CARD_GAME_ACTION_CHOSE:
-				actionString = [[NSString alloc] initWithFormat: @"Chose card %@.\n", [self stringFromCardList:action.cardList]];
-				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
-				break;
-				
-			default:
-				break;
-		}
+		NSAttributedString *attributedStringMessage = [self getAttributedStringFromAction:action];
+		[result appendAttributedString:attributedStringMessage];
+		[result appendAttributedString:returnLine];
 	}
 	
 	return result;
@@ -129,7 +141,8 @@
 // Subclasses must override this method.  Need to return an attributed string
 // that describes a card.
 //
-- (NSAttributedString *) getAttributedContentsForCard:(Card *)card {
+- (NSAttributedString *) getAttributedContentsForCard:(Card *)card
+{
 	return nil;
 }
 
@@ -158,10 +171,6 @@
 	// 1 means match 2 cards
 	// 2 means match 3 cards
 	// n means match n + 1 cards
-	NSInteger selectedSegmentIndex = [self.cardsToMatchControl selectedSegmentIndex];
-	if (selectedSegmentIndex > 0) {
-		result = selectedSegmentIndex + 1;
-	}
 	
 	return result;
 }
@@ -184,10 +193,14 @@
 	return nil;
 }
 
+- (NSAttributedString *)getLastActionMessage
+{
+	CardGameAction *lastAction = [[self.gameModel cardGameActionList] lastObject];
+	return [self getAttributedStringFromAction:lastAction];
+}
+
 - (void)updateUI
 {
-	self.cardsToMatchControl.enabled = _gameModel == nil;
-	
 	for (int i = 0; i < [self.cardButtonList count]; i++) {
 		Card *card = [self.gameModel cardAtIndex:i];
 		UIButton *cardButton = self.cardButtonList[i];
@@ -195,18 +208,16 @@
 		[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
 		cardButton.enabled = !card.isMatched;
 	}
-	NSString *lastActionMessage = [[self.gameModel actionMessageList] lastObject];
-	NSLog(@"Last message %@", lastActionMessage);
-	[self.lastActionMessage setText: lastActionMessage];
+	NSLog(@"Last message %@", [[self.gameModel actionMessageList] lastObject]);
+	[self.lastActionMessage setAttributedText:[self getLastActionMessage] ];
+	
 	[self.scoreLabel setText:[NSString stringWithFormat:@"Score: %d", [self.gameModel score]]];
 }
 
-- (NSAttributedString *)attributedTitleForCard:(Card *)card
+- (NSAttributedString *) attributedTitleForCard:(Card *)card
 {
 	return [self getAttributedContentsForCard:card];
 }
-
-
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {

@@ -66,17 +66,17 @@ typedef struct MatchResult
 	NSArray *firstArray = [Card cloneCardList:cardList startingAtIndex:1];
 	MatchResult matchResult = [Card match:firstCard cardList:firstArray];
 	
-	if (matchResult.matches >= numberOfRequiredMatches) {
-		int maxMatches = [Card maxMatches:[cardList count]];
-		float multiplier =  1.0 + (matchResult.matches / (float)maxMatches) * log(maxMatches);  // A percentage of actual matches vs possible matches
-		result = matchResult.matchScore * multiplier;
-
-		NSLog(@"Max matches is %d. Multiplier is %f", maxMatches, multiplier);
-		NSLog(@"Found %d matches of score %d:%d in cards %@", matchResult.matches, matchResult.matchScore, result, cardList);
-	} else {
-		NSLog(@"Not enough matches found.  Needed %d but found only %d.", numberOfRequiredMatches, matchResult.matches);
-	}
-	
+//	if (matchResult.matches >= numberOfRequiredMatches) {
+//		int maxMatches = [Card maxMatches:[cardList count]];
+//		float multiplier =  1.0 + (matchResult.matches / (float)maxMatches) * log(maxMatches);  // A percentage of actual matches vs possible matches
+//		result = matchResult.matchScore * multiplier;
+//
+//		NSLog(@"Max matches is %d. Multiplier is %f", maxMatches, multiplier);
+//		NSLog(@"Found %d matches of score %d:%d in cards %@", matchResult.matches, matchResult.matchScore, result, cardList);
+//	} else {
+//		NSLog(@"Not enough matches found.  Needed %d but found only %d.", numberOfRequiredMatches, matchResult.matches);
+//	}
+	result = matchResult.matchScore;
 	return result;
 }
 
@@ -95,11 +95,8 @@ typedef struct MatchResult
 		int score = [card match:cardList];
 		if (score > 0) {
 			matchResult.matchScore += score;
-			matchResult.matches += [card getNumberOfMatches:cardList];
+			matchResult.matches += 1;
 		}
-		Card *nextCard = cardList[0];
-		NSArray *nextCardList = [Card cloneCardList:cardList startingAtIndex:1];
-		matchResult = [Card addLeft:matchResult toRight:[Card match:nextCard cardList:nextCardList]];  // recursive call
 	}
 	
 	return matchResult;

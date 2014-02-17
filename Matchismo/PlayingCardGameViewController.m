@@ -51,19 +51,28 @@
 	return result;
 }
 
+//Override
+- (NSAttributedString *) attributedTitleForCard:(Card *)card
+{
+	NSAttributedString *result = nil;
+	
+	if (card.isChosen == YES) {
+		result = [self getAttributedContentsForCard:card];
+	}
+	
+	return result;
+}
+
 // Override
 - (NSAttributedString *) getAttributedContentsForCard:(Card *)card
 {
 	NSAttributedString *result = nil;
 	
 	PlayingCard *playingCard = (PlayingCard *)card;
-	if (card.isChosen == YES) {
-		result = [[NSMutableAttributedString alloc] initWithString:[playingCard contents]
-														attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:9.0]}];
-	}
+	result = [[NSMutableAttributedString alloc] initWithString:[playingCard contents]
+													attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:9.0]}];
 	
 	return result;
-
 }
 
 //

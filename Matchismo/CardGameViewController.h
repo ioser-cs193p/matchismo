@@ -12,6 +12,7 @@
 @interface CardGameViewController : UIViewController
 
 - (NSAttributedString *) getAttributedContentsForCard:(Card *)card;
+- (NSAttributedString *) attributedTitleForCard:(Card *)card;
 - (UIImage *)imageForCard:(Card *)card;
 
 @end

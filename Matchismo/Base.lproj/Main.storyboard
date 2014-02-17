@@ -494,7 +494,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pql-fH-RAg">
                                 <rect key="frame" x="20" y="272" width="40" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
+                                <state key="normal" backgroundImage="setcardback">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -504,6 +504,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eAk-bW-TCN">
                                 <rect key="frame" x="68" y="272" width="40" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="setcardback"/>
                                 <connections>
                                     <action selector="touchCardButton:" destination="tGa-5b-JLp" eventType="touchUpInside" id="I5X-VY-RsO"/>
                                 </connections>
@@ -511,7 +512,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVE-kA-erK">
                                 <rect key="frame" x="116" y="272" width="40" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
+                                <state key="normal" backgroundImage="setcardback">
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
@@ -521,6 +522,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIC-lz-qXW">
                                 <rect key="frame" x="164" y="272" width="40" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="setcardback"/>
                                 <connections>
                                     <action selector="touchCardButton:" destination="tGa-5b-JLp" eventType="touchUpInside" id="NrD-Mh-l2G"/>
                                 </connections>
@@ -552,6 +554,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EaP-nV-ZoO">
                                 <rect key="frame" x="212" y="272" width="40" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="setcardback"/>
                                 <connections>
                                     <action selector="touchCardButton:" destination="tGa-5b-JLp" eventType="touchUpInside" id="M3a-JY-gFa"/>
                                 </connections>
@@ -583,6 +586,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oAA-to-7Zc">
                                 <rect key="frame" x="260" y="272" width="40" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="setcardback"/>
                                 <connections>
                                     <action selector="touchCardButton:" destination="tGa-5b-JLp" eventType="touchUpInside" id="6Ut-5a-uiu"/>
                                 </connections>
@@ -596,6 +600,7 @@
                                 </state>
                                 <connections>
                                     <action selector="redeal:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1Ih-Re-c6c"/>
+                                    <action selector="redeal:" destination="tGa-5b-JLp" eventType="touchUpInside" id="ICK-5U-FxY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNj-Xz-5xk">
@@ -696,6 +701,7 @@
     </scenes>
     <resources>
         <image name="cardback" width="64" height="96"/>
+        <image name="setcardback" width="64" height="96"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -703,6 +709,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="83T-ks-wSc"/>
+        <segue reference="cgk-he-ZdV"/>
     </inferredMetricsTieBreakers>
 </document>
