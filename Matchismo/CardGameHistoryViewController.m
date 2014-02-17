@@ -10,13 +10,13 @@
 
 @interface CardGameHistoryViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *historyTextView;
-@property (weak, nonatomic) NSString *historyText;
+@property (weak, nonatomic) NSAttributedString *historyText;
 
 @end
 
 @implementation CardGameHistoryViewController
 
-- (void) setHistory:(NSString *)historyString
+- (void) setHistory:(NSAttributedString *)historyString
 {
 	self.historyText = historyString;
 }
@@ -29,7 +29,7 @@
 
 - (void)updateUI
 {
-	self.historyTextView.text = self.historyText;
+	self.historyTextView.attributedText = self.historyText;
 }
 
 @end

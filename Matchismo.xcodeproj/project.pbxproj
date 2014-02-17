@@ -31,6 +31,7 @@
 		9ACEE798182AE55000991872 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9ACEE796182AE55000991872 /* InfoPlist.strings */; };
 		9ACEE79A182AE55000991872 /* MatchismoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACEE799182AE55000991872 /* MatchismoTests.m */; };
 		9ADDC39218B1480500E6690E /* CardGameHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADDC39118B1480500E6690E /* CardGameHistoryViewController.m */; };
+		9ADDC39518B1A45B00E6690E /* CardGameAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADDC39418B1A45B00E6690E /* CardGameAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		9ACEE799182AE55000991872 /* MatchismoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchismoTests.m; sourceTree = "<group>"; };
 		9ADDC39018B1480500E6690E /* CardGameHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardGameHistoryViewController.h; sourceTree = "<group>"; };
 		9ADDC39118B1480500E6690E /* CardGameHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardGameHistoryViewController.m; sourceTree = "<group>"; };
+		9ADDC39318B1A45B00E6690E /* CardGameAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardGameAction.h; sourceTree = "<group>"; };
+		9ADDC39418B1A45B00E6690E /* CardGameAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardGameAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,8 @@
 				9A86EEC01839F87E00575ED9 /* PlayingCard */,
 				9A2EFE66182E11C50074DF00 /* CardMatchingGame.h */,
 				9A2EFE67182E11C50074DF00 /* CardMatchingGame.m */,
+				9ADDC39318B1A45B00E6690E /* CardGameAction.h */,
+				9ADDC39418B1A45B00E6690E /* CardGameAction.m */,
 				9A96C61F182B57AB0008D3B8 /* Card.h */,
 				9A96C620182B57AB0008D3B8 /* Card.m */,
 				9A96C626182B655D0008D3B8 /* Deck.h */,
@@ -356,6 +361,7 @@
 				9A96C628182B655D0008D3B8 /* Deck.m in Sources */,
 				9A96C621182B57AB0008D3B8 /* Card.m in Sources */,
 				9A86EEC41839F90100575ED9 /* SetDeck.m in Sources */,
+				9ADDC39518B1A45B00E6690E /* CardGameAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

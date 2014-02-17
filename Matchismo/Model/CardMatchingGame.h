@@ -14,6 +14,7 @@
 
 @property (nonatomic, readonly)NSInteger score;
 @property (nonatomic, readonly, strong)NSMutableArray *actionMessageList;
+@property (nonatomic, readonly, strong)NSMutableArray *cardGameActionList;
 
 //
 // Designated initializer

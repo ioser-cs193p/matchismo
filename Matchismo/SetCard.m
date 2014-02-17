@@ -99,12 +99,22 @@
 	return self;
 }
 
+- (NSString *) getSymbolAndRankString
+{
+	NSMutableString *result = [[NSMutableString alloc] init];
+	for (int i = 0; i < self.rank; i++) {
+		[result appendString:self.symbol];
+	}
+	
+	return result;
+}
+
 //
 // Inherited Public Methods
 //
 - (NSString *)contents
 {
-	return [self description];
+	return [self getSymbolAndRankString];
 }
 
 - (NSString *)description

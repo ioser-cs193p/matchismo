@@ -53,16 +53,6 @@
 	return [[SetDeck alloc] init];
 }
 
-- (NSString *) getSymbolAndRankStringForCard:(SetCard *)setCard
-{
-	NSMutableString *result = [[NSMutableString alloc] init];
-	for (int i = 0; i < setCard.rank; i++) {
-		[result appendString:setCard.symbol];
-	}
-	
-	return result;
-}
-
 - (UIColor *) getFillColorAndAlphaForCard:(SetCard *)setCard
 {
 	UIColor *result = nil;
@@ -78,21 +68,29 @@
 	return result;
 }
 
+- (NSDictionary *)getAttributesForCard:(SetCard *)setCard
+{
+	NSDictionary *result = nil;
+	
+	if (setCard != nil) {
+		result = @{ NSStrokeWidthAttributeName : @-3,
+				    NSFontAttributeName : [UIFont systemFontOfSize:12.0],
+					NSForegroundColorAttributeName : [self getFillColorAndAlphaForCard:setCard],
+					NSStrokeColorAttributeName : setCard.color
+					};
+	}
+	
+	return result;
+}
+
 //
 // Returns an attributed string representation of a card
 //
 - (NSAttributedString *) getAttributedContentsForCard:(Card *)card
 {
 	SetCard *setCard = (SetCard *)card;
-	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:[self getSymbolAndRankStringForCard:setCard]
-										   attributes:@{ NSStrokeWidthAttributeName : @-3,
-														 NSFontAttributeName : [UIFont systemFontOfSize:18.0],
-														 NSForegroundColorAttributeName : [self getFillColorAndAlphaForCard:setCard],
-														 NSStrokeColorAttributeName : setCard.color,
-														 }];
-	
-//	NSDictionary *attributes = @{
-
+	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:[setCard contents]
+																			   attributes:[self getAttributesForCard:setCard]];
 	return result;
 }
 

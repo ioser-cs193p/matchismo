@@ -10,6 +10,6 @@
 
 @interface CardGameHistoryViewController : UIViewController
 
-- (void) setHistory:(NSString *)historyString;
+- (void) setHistory:(NSAttributedString *)historyString;
 
 @end

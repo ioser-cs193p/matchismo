@@ -10,6 +10,7 @@
 #import "CardMatchingGame.h"
 #import "CardGameViewController.h"
 #import "CardGameHistoryViewController.h"
+#import "CardGameAction.h"
 #import "Deck.h"
 #import "Card.h"
 
@@ -37,13 +38,69 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSString *) getHistory
+- (NSString *) stringFromCardList:(NSArray *)cardList
 {
 	NSMutableString *result = [[NSMutableString alloc] init];
 	
-	for (NSString *actionString in [self.gameModel actionMessageList]) {
-		[result appendString:actionString];
-		[result appendString:@"\n"];
+	for (int i = 0; i < cardList.count; i++) {
+		Card *card = [cardList objectAtIndex:i];
+		[result appendString:card.contents];
+		if (i < cardList.count - 1) {
+			[result appendString:@", "];
+		}
+	}
+	
+	return result;
+}
+
+/*
+ * Return an attributed string verion of a message where each card title is returned as an attributed
+ * string version.
+ *
+ */
+- (NSAttributedString *) attributedStringFromString:(NSString *)string andCardList:(NSArray *)cardList
+{
+	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:string];
+	
+	for (Card *card in cardList) {
+		NSString *title = card.contents;
+		NSRange range = [string rangeOfString:title];
+		[result replaceCharactersInRange:range withAttributedString:[self attributedTitleForCard:card]];
+	}
+	
+	return result;
+}
+
+- (NSAttributedString *) getHistory
+{
+	NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+	
+	for (CardGameAction *action in [self.gameModel cardGameActionList]) {
+		NSString *actionString = nil;
+		switch (action.predicate) {
+			case CARD_GAME_ACTION_UNCHOSE:
+				actionString = [[NSString alloc] initWithFormat: @"Unchose card %@.\n", [self stringFromCardList:action.cardList]];
+				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+				break;
+				
+			case CARD_GAME_ACTION_MATCH:
+				actionString = [[NSString alloc] initWithFormat: @"Matched %@ for %d points.\n", [self stringFromCardList:action.cardList], action.points];
+				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+				break;
+				
+			case CARD_GAME_ACTION_NOMATCH:
+				actionString = [[NSString alloc] initWithFormat: @"No matches for %@. %d points substracted.\n", [self stringFromCardList:action.cardList], action.points];
+				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+				break;
+				
+			case CARD_GAME_ACTION_CHOSE:
+				actionString = [[NSString alloc] initWithFormat: @"Chose card %@.\n", [self stringFromCardList:action.cardList]];
+				[result appendAttributedString:[self attributedStringFromString:actionString andCardList:action.cardList]];
+				break;
+				
+			default:
+				break;
+		}
 	}
 	
 	return result;
@@ -125,7 +182,7 @@
 	for (int i = 0; i < [self.cardButtonList count]; i++) {
 		Card *card = [self.gameModel cardAtIndex:i];
 		UIButton *cardButton = self.cardButtonList[i];
-		[cardButton setAttributedTitle:[self attributedTitleForCard:card] forState:UIControlStateNormal];
+		[cardButton setAttributedTitle:card.isChosen ? [self attributedTitleForCard:card] : nil forState:UIControlStateNormal];
 		[cardButton setBackgroundImage:[self imageForCard:card] forState:UIControlStateNormal];
 		cardButton.enabled = !card.isMatched;
 	}
@@ -137,13 +194,7 @@
 
 - (NSAttributedString *)attributedTitleForCard:(Card *)card
 {
-	NSAttributedString * result = [[NSAttributedString alloc] initWithString:@""];
-	
-	if (card.isChosen) {
-		result = [self getAttributedContentsForCard:card];
-	}
-	
-	return result;
+	return [self getAttributedContentsForCard:card];
 }
 
 - (UIImage *)imageForCard:(Card *)card
@@ -162,7 +213,7 @@
 	int index = [self.cardButtonList indexOfObject:sender];
 	[self.gameModel chooseCardAtIndex:index];
 	[self updateUI];
-	NSLog(@"Touched button at index %d contains card %@", index, [self.gameModel cardAtIndex:index].contents);
+	NSLog(@"Touched button at index %d contains card %@", index, [self.gameModel cardAtIndex:index].description);
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "CardMatchingGame.h"
+#import "CardGameAction.h"
 
 @interface CardMatchingGame ()
 
@@ -14,11 +15,25 @@
 @property (nonatomic, strong)NSMutableArray *cards; // of type Card
 @property (nonatomic)NSUInteger numberOfCardsToCompare; // # of cards in match check
 @property (nonatomic, readwrite, strong)NSMutableArray *actionMessageList;
+@property (nonatomic, readwrite, strong)NSMutableArray *cardGameActionList;
 
 @end
 
 @implementation CardMatchingGame
 
+- (NSMutableArray *)cardGameActionList
+{
+	if (_cardGameActionList == nil) {
+		_cardGameActionList = [[NSMutableArray alloc] init];
+	}
+	
+	return _cardGameActionList;
+}
+
+- (void)addCardGameAction:(CardGameAction *)cardGameAction
+{
+	[self.cardGameActionList addObject:cardGameAction];
+}
 
 - (NSMutableArray *)actionMessageList
 {
@@ -134,12 +149,14 @@ static const int REQUIRED_MATCHES = 1;
 {
 	Card *card = [self cardAtIndex:index];
 	NSString *message = nil;
+	CardGameAction *action = nil;
 		
 	if (card != nil && card.isMatched == NO) {
 		if (card.isChosen) {
 			card.chosen = NO;
 			message = [NSString stringWithFormat:@"Unchose card %@", card.contents];
-		} else {
+			action = [CardGameAction initWithPredicate:CARD_GAME_ACTION_UNCHOSE cardList:@[card]];
+		} else if (card != nil) {
 			NSArray *chosenCardList = [self chosenCards];
 			if ([chosenCardList count] == self.numberOfCardsToCompare) {
 				NSArray *cardsToCompare = [chosenCardList arrayByAddingObject:card];
@@ -149,13 +166,16 @@ static const int REQUIRED_MATCHES = 1;
 					card.matched = YES;
 					[self markCardsAsMatched:chosenCardList];
 					message = [NSString stringWithFormat:@"Matched %@ for %d points.", [self cardListAsString:cardsToCompare], matchScore * MATCH_BONUS];
+					action = [CardGameAction initWithPredicate:CARD_GAME_ACTION_MATCH cardList:cardsToCompare points:matchScore * MATCH_BONUS];
 				} else {
 					self.score -= MISMATCH_PENALTY;
 					[self markCardsAsUnchosen:chosenCardList];
 					message = [NSString stringWithFormat:@"No matches for %@. %d points substracted.", [self cardListAsString:cardsToCompare], MISMATCH_PENALTY];
+					action = [CardGameAction initWithPredicate:CARD_GAME_ACTION_NOMATCH cardList:cardsToCompare points:MISMATCH_PENALTY];
 				}
 			} else {
 				message = [NSString stringWithFormat:@"Chose card %@", card.contents];
+				action = [CardGameAction initWithPredicate:CARD_GAME_ACTION_CHOSE cardList:@[card]];
 			}
 			self.score -= FLIP_COST;
 			card.chosen = YES;
@@ -164,6 +184,7 @@ static const int REQUIRED_MATCHES = 1;
 	
 	if (card != nil) {
 		[self addActionMessage:message];
+		[self addCardGameAction:action];
 	}
 	
 	NSLog(@"Last action message: %@", message);
